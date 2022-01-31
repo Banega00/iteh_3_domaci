@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import { FC, useEffect, useState } from 'react';
 import './App.css';
+import GameCard from './GameCard';
+import { HttpClient } from './utils/http-client';
 
-function App() {
+const App: FC = () => {
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    HttpClient.getGames().then(games => setGames(games));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className='px-24 bg-black opacity-80 flex items-end h-80'>
+        <div className='text-white text-[7rem] font-medium'>Game</div>
+        <div className='text-green-700 text-[7rem] font-bold'>HUB</div>
+      </div>
+      <div className='flex-row flex flex-wrap px-16 justify-center bg-gray-800'>
+        {games.map((game: any, index) => <GameCard game={game} key={game.id} />)}
+      </div>
+    </>
   );
 }
 
