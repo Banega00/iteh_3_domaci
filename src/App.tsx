@@ -16,7 +16,7 @@ const App: FC = () => {
         <div className='text-white text-[7rem] font-medium'>Game</div>
         <div className='text-green-700 text-[7rem] font-bold'>HUB</div>
       </div>
-      <div className='flex-row flex flex-wrap px-16 justify-center bg-gray-800'>
+      <div className='flex-row flex flex-wrap px-8 pt-16 justify-center bg-gray-800'>
         {games.map((game: any, index) => <GameCard game={game} key={game.id} />)}
       </div>
     </>
