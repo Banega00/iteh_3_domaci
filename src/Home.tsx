@@ -15,18 +15,14 @@ const Home:FC = ()=>{
         setCount(response.count)
       });
     }, [currentPage]);
-  
-    const textShadowStyle = {
-      textShadow: '4px 5px 6px black'
-    }
-  
+
     return (
       <div className="bg-black">
         <div className='px-24 opacity-80 flex justify-end h-96
         bg-no-repeat bg-center bg-cover
         bg-banner-background shadow-xl shadow-green-500'>
-          <div className='text-white text-[7rem] font-bold' style={textShadowStyle}>Game</div>
-          <div className='text-green-600 text-[7rem] font-black' style={textShadowStyle}>HUB</div>
+                <div className='text-white text-[7rem] font-bold' style={{ textShadow: '4px 5px 6px black' }}>Game</div>
+                <div className='text-green-600 text-[7rem] font-black' style={{ textShadow: '4px 5px 6px black' }}>HUB</div>
         </div>
         <div className='flex-row flex flex-wrap px-8 pt-16 justify-center'>
           {games.map((game: any, index) => <GameCard game={game} key={game.id}/>)}
