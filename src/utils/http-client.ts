@@ -3,10 +3,9 @@ export class HttpClient {
     public static baseURL: string = 'https://api.rawg.io/api/games';
     static async getGames(page?: number) {
         let url = this.baseURL + "?key=" + this.apiKey;
-        url += "&page" + (page ? page : '1');
-
+        url += "&page=" + (page ? page : "1");
         const response = await fetch(url);
         const responseData = await response.json();
-        return responseData.results;
+        return responseData;
     }
 }
