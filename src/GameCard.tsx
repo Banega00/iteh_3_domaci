@@ -4,9 +4,21 @@ import { SiNintendo3Ds } from 'react-icons/si'
 import {DiAndroid} from 'react-icons/di'
 
 const GameCard: FC<any> = ({ game }) => {
+    const platformIconSize = 19;
+    const platformIconColor = '#49c96b'
+    const platforms: { [key: string]: ReactElement } = {
+        "xbox": <FaXbox size={platformIconSize} color={platformIconColor}/>,
+        "playstation": <FaPlaystation size={platformIconSize} color={platformIconColor} />,
+        "pc": <FaDesktop size={platformIconSize} color={platformIconColor}/>,
+        "nintendo": <SiNintendo3Ds size={platformIconSize} color={platformIconColor}/>,
+        "linux": <FaLinux size={platformIconSize} color={platformIconColor}/>,
+        "mac": <FaApple size={platformIconSize} color={platformIconColor}/>,
+        "android": <DiAndroid size={platformIconSize} color={platformIconColor}/>,
+        "ios": <FaAppStoreIos size={platformIconSize} color={platformIconColor}/>
+    }
 
     return (
-        <div className="text-white w-1/5 m-7 mb-20 bg-gray-800 h-80 rounded-xl overflow-hidden
+        <div onClick={()=>document.location="/game/"+game.id} className="text-white w-1/5 m-7 mb-20 bg-gray-800 h-80 rounded-xl overflow-hidden
         shadow-xl shadow-green-700
         hover:scale-105 hover:shadow-green-500
         transition-all cursor-pointer">
@@ -21,27 +33,13 @@ const GameCard: FC<any> = ({ game }) => {
                     <div className="flex justify-start my-3">
                         {game.parent_platforms.map((platform: any) =>
                             <div className="mr-2">
-                                {mapPlatformToIcon(platform.platform.slug, 19, "#49c96b")}
+                                {platforms[platform.platform.slug]}
                             </div>)}
                     </div>
                 </div>
             </div>
         </div>
     );
-}
-
-function mapPlatformToIcon(iconName: string, size: number, color: string): ReactElement {
-    const platforms: { [key: string]: ReactElement } = {
-        "xbox": <FaXbox size={size} color={color}/>,
-        "playstation": <FaPlaystation size={size} color={color} />,
-        "pc": <FaDesktop size={size} color={color}/>,
-        "nintendo": <SiNintendo3Ds size={size} color={color}/>,
-        "linux": <FaLinux size={size} color={color}/>,
-        "mac": <FaApple size={size} color={color}/>,
-        "android": <DiAndroid size={size} color={color}/>,
-        "ios": <FaAppStoreIos size={size} color={color}/>
-    }
-    return platforms[iconName];
 }
 
 export default GameCard;
