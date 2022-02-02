@@ -1,3 +1,5 @@
+import { GameBasicInfo, GameDetails } from "../models/Game.model";
+
 export class HttpClient {
   public static apiKey: string = "fced4ea393524a4d871cbcd4c9859db5";
   public static baseURL: string = "https://api.rawg.io/api/games";
@@ -6,7 +8,8 @@ export class HttpClient {
     url.searchParams.append("key", this.apiKey);
     url.searchParams.append("page", page ? page.toString() : "1");
     const response = await fetch(url.toString());
-    const responseData = await response.json();
+    const responseData: { results: GameBasicInfo[]; count: number } =
+      await response.json();
     return responseData;
   }
 
@@ -15,7 +18,7 @@ export class HttpClient {
     let url = new URL(this.baseURL + "/" + gameId);
     url.searchParams.append("key", this.apiKey);
     let response = await fetch(url.toString());
-    let responseData = await response.json();
+    let responseData: GameDetails = await response.json();
 
     //query game trailers
     url = new URL(this.baseURL + "/" + gameId + "/movies");
@@ -29,7 +32,6 @@ export class HttpClient {
     response = await fetch(url.toString());
     responseData.screenshots = (await response.json())["results"];
 
-    console.log(responseData);
     return responseData;
   }
 }

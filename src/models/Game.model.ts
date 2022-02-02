@@ -29,7 +29,46 @@ export interface GameBasicInfo {
   user_game: any;
 }
 
-export interface GameDetails {}
+
+export interface GameDetails extends GameBasicInfo {
+  website: string;
+  movies_count: number;
+  creators_count: number;
+  achievements_count: number;
+  parent_achievements_count: number;
+  reddit_url: string;
+  reddit_name: string;
+  reddit_description: string;
+  reddit_logo: string;
+  reddit_cout: number;
+  twich_count: number;
+  youtube_count: number;
+  reviews_text_count: number;
+  suggestions_count: number;
+  playtime: number;
+  developers: any[];
+  tags: any[];
+  description: string;
+  description_raw: string;
+  publishers: GamePublisher[];
+  screenshots: GameScreenshot[];
+  movies: any[];
+}
+
+interface GameScreenshot {
+  id: number;
+  image: string;
+  width: number;
+  height: number;
+  is_deleted: boolean;
+}
+interface GamePublisher {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+}
 
 interface GameGenre {
   games_count: string;

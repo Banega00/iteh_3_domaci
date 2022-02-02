@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { GameDetails as GameDetailsModel } from "./models/Game.model";
 import { HttpClient } from "./utils/http-client";
 
 const GameDetails: FC = () => {
     const { id: gameId } = useParams();
-    const [gameDetails, setGameDetails] = useState<any>()
+    const [gameDetails, setGameDetails] = useState<GameDetailsModel>()
     useEffect(() => {
-        HttpClient.getGameDetails(gameId!).then((response: any) => {
+        HttpClient.getGameDetails(gameId!).then((response: GameDetailsModel) => {
             setGameDetails(response);
         });
     }, [gameId]);
