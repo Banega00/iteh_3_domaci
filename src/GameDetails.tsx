@@ -12,7 +12,7 @@ const GameDetails: FC = () => {
     }, [gameId]);
     return (
         <div>
-            {gameDetails ?
+            {gameDetails &&
                 <div className="bg-black">
                     <img className="w-screen absolute h-[60vh] object-cover object-top blur-sm shadow-xl shadow-green-500" src={gameDetails.background_image} alt="" />
                     <div className="text-7xl text-white relative z-10 text-center font-bold pt-[20%]" style={{ textShadow: '4px 5px 6px black' }}>{gameDetails.name}</div>
@@ -36,7 +36,7 @@ const GameDetails: FC = () => {
                         <div className="py-2 text-center bg-green-800">Gameplay</div>
                         {gameDetails.screenshots.map((screenshot: any) => <div className="pb-2 text-sm my-2 border-b-2 border-white "><img className="mx-auto" src={screenshot.image} alt="" /></div>)}
                     </div>
-                </div> : ''
+                </div>
             }
 
         </div>
