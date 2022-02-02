@@ -3,10 +3,11 @@ import { GameBasicInfo, GameDetails } from "../models/Game.model";
 export class HttpClient {
   public static apiKey: string = "fced4ea393524a4d871cbcd4c9859db5";
   public static baseURL: string = "https://api.rawg.io/api/games";
-  static async getGames(page?: number) {
+  static async getGames(page?: number, searchWord?: string) {
     let url = new URL(this.baseURL);
     url.searchParams.append("key", this.apiKey);
     url.searchParams.append("page", page ? page.toString() : "1");
+    if (searchWord) url.searchParams.append("search", searchWord);
     const response = await fetch(url.toString());
     const responseData: { results: GameBasicInfo[]; count: number } =
       await response.json();

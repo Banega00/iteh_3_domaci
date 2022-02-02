@@ -7,15 +7,21 @@ const Home:FC = ()=>{
     const [games, setGames] = useState<GameBasicInfo[]>([]);
     const [count, setCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
+  const [searchWord, setSearchWord] = useState('');
     const resultsPerPage = 20;
     const numberOfPages = Math.ceil(count / resultsPerPage);
   
     useEffect(() => {
-      HttpClient.getGames(currentPage).then(response => {
+      HttpClient.getGames(currentPage, searchWord).then(response => {
         setGames(response.results)
         setCount(response.count)
       });
-    }, [currentPage]);
+    }, [currentPage, searchWord]);
+
+  const handleSearch = () => {
+    const searchWord: string = (document.getElementById("searchWord") as HTMLInputElement).value;
+    setSearchWord(searchWord);
+  }
 
     return (
       <div className="bg-black">
@@ -25,7 +31,14 @@ const Home:FC = ()=>{
                 <div className='text-white text-[7rem] font-bold' style={{ textShadow: '4px 5px 6px black' }}>Game</div>
                 <div className='text-green-600 text-[7rem] font-black' style={{ textShadow: '4px 5px 6px black' }}>HUB</div>
         </div>
-        <div className='flex-row flex flex-wrap px-8 pt-16 justify-center'>
+        <div className="mt-12 mx-[5.5rem] flex">
+          <span className="h-[2rem] bg-green-600 inline-block">
+            <input id="searchWord" type="text" className="h-full" />
+          </span>
+          <span onClick={handleSearch}
+            className="text-white bg-green-800 h-[2rem] px-2 cursor-pointer hover:bg-green-600 transition-all leading-8 inline-block">Search games</span>
+        </div>
+        <div className='flex-row flex flex-wrap px-8 pt-8 justify-center'>
                 {games.map((game: GameBasicInfo, index) => <GameCard game={game} key={game.id} />)}
         </div>
         <div className="text-white flex justify-center pb-16 ">
