@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
 import GameDetails from './GameDetails';
 import Home from './Home';
 

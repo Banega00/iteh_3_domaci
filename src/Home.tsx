@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import GameCard from "./GameCard";
+import { GameBasicInfo } from "./models/Game.model";
 import { HttpClient } from "./utils/http-client";
 
 const Home:FC = ()=>{
-    const [games, setGames] = useState([]);
+    const [games, setGames] = useState<GameBasicInfo[]>([]);
     const [count, setCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const resultsPerPage = 20;
@@ -25,7 +26,7 @@ const Home:FC = ()=>{
                 <div className='text-green-600 text-[7rem] font-black' style={{ textShadow: '4px 5px 6px black' }}>HUB</div>
         </div>
         <div className='flex-row flex flex-wrap px-8 pt-16 justify-center'>
-          {games.map((game: any, index) => <GameCard game={game} key={game.id}/>)}
+                {games.map((game: GameBasicInfo, index) => <GameCard game={game} key={game.id} />)}
         </div>
         <div className="text-white flex justify-center pb-16 ">
           <nav>
